@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+    <body>
+        <model-viewer id="model" ar shadow-intensity="1" camera-controls touch-action="pan-y"></model-viewer>
+    </body>
+    <script>
+        window.onload = () => {
+            const model = document.getElementById("model");
+            const params = new Proxy(new URLSearchParams(window.location.search), {
+                get: (searchParams, prop) => searchParams.get(prop),
+            });
+
+            model.src = params.url;
+            model.alt = params.alt;
+        }
+    </script>
+    <style>
+        html {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 250px;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</html>
